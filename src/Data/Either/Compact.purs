@@ -61,11 +61,11 @@ fromFunction :: forall domain codomain element fields array record int number ch
 fromFunction = unsafeCoerce
 
 function :: forall domain codomain element fields array record int number char string boolean result
-          . CompactEither domain codomain element fields Unit array record int number char string boolean
-         -> result
+          . result
          -> ((domain -> codomain) -> result)
+         -> CompactEither domain codomain element fields Unit array record int number char string boolean
          -> result
-function either default fn
+function default fn either
   | isFunction either = fn (unsafeCoerce either)
   | otherwise = default
 
@@ -75,11 +75,11 @@ fromArray :: forall domain codomain element fields function record int number ch
 fromArray = unsafeCoerce
 
 array :: forall domain codomain element fields function record int number char string boolean result
-       . CompactEither domain codomain element fields function Unit record int number char string boolean
-      -> result
+       . result
       -> (Array element -> result)
+      -> CompactEither domain codomain element fields function Unit record int number char string boolean
       -> result
-array either default fn
+array default fn either
   | isArray either = fn (unsafeCoerce either)
   | otherwise = default
 
@@ -89,11 +89,11 @@ fromRecord :: forall domain codomain element fields function array int number ch
 fromRecord = unsafeCoerce
 
 record :: forall domain codomain element fields function array int number char string boolean result
-        . CompactEither domain codomain element fields function array Unit int number char string boolean
-       -> result
+        . result
        -> ({| fields} -> result)
+       -> CompactEither domain codomain element fields function array Unit int number char string boolean
        -> result
-record either default fn
+record default fn either
   | isRecord either = fn (unsafeCoerce either)
   | otherwise = default
 
@@ -103,11 +103,11 @@ fromInt :: forall domain codomain element fields function array record char stri
 fromInt = unsafeCoerce
 
 int :: forall domain codomain element fields function array record char string boolean result
-     . CompactEither domain codomain element fields function array record Unit Void char string boolean
-    -> result
+     . result
     -> (Int -> result)
+    -> CompactEither domain codomain element fields function array record Unit Void char string boolean
     -> result
-int either default fn
+int default fn either
   | isNumber either = fn (unsafeCoerce either)
   | otherwise = default
 
@@ -117,11 +117,11 @@ fromNumber :: forall domain codomain element fields function array record char s
 fromNumber = unsafeCoerce
 
 number :: forall domain codomain element fields function array record char string boolean result
-        . CompactEither domain codomain element fields function array record Void Unit char string boolean
-       -> result
+        . result
        -> (Number -> result)
+       -> CompactEither domain codomain element fields function array record Void Unit char string boolean
        -> result
-number either default fn
+number default fn either
   | isNumber either = fn (unsafeCoerce either)
   | otherwise = default
 
@@ -131,11 +131,11 @@ fromChar :: forall domain codomain element fields function array record int numb
 fromChar = unsafeCoerce
 
 char :: forall domain codomain element fields function array record int number boolean result
-      . CompactEither domain codomain element fields function array record int number Unit Void boolean
-     -> result
+      . result
      -> (Char -> result)
+     -> CompactEither domain codomain element fields function array record int number Unit Void boolean
      -> result
-char either default fn
+char default fn either
   | isString either = fn (unsafeCoerce either)
   | otherwise = default
 
@@ -145,11 +145,11 @@ fromString :: forall domain codomain element fields function array record int nu
 fromString = unsafeCoerce
 
 string :: forall domain codomain element fields function array record int number boolean result
-        . CompactEither domain codomain element fields function array record int number Void Unit boolean
-       -> result
+        . result
        -> (Char -> result)
+       -> CompactEither domain codomain element fields function array record int number Void Unit boolean
        -> result
-string either default fn
+string default fn either
   | isString either = fn (unsafeCoerce either)
   | otherwise = default
 
@@ -159,11 +159,11 @@ fromBoolean :: forall domain codomain element fields function array record int n
 fromBoolean = unsafeCoerce
 
 boolean :: forall domain codomain element fields function array record int number char string result
-         . CompactEither domain codomain element fields function array record int number char string Unit
-        -> result
+         . result
         -> (Boolean -> result)
+        -> CompactEither domain codomain element fields function array record int number char string Unit
         -> result
-boolean either default fn
+boolean default fn either
   | isBoolean either = fn (unsafeCoerce either)
   | otherwise = default
 
