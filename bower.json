@@ -1,5 +1,6 @@
 {
   "name": "purescript-compact",
+  "license": "BSD-3-Clause",
   "dependencies": {
     "purescript-unsafe-coerce": "^1.0.0",
     "purescript-prelude": "^1.0.1"
