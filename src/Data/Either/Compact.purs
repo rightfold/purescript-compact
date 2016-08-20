@@ -13,11 +13,38 @@ module Data.Either.Compact
 import Prelude
 import Unsafe.Coerce (unsafeCoerce)
 
+-- | Sum type with compact representation.
+-- |
+-- | #### Type arguments
+-- |
+-- |  1. Function domain, or `Void`.
+-- |  2. Function codomain, or `Void`.
+-- |  3. Array element, or `Void`.
+-- |  4. Record fields, or `()`.
+-- |  5. Can this be a function? `Unit` if yes, `Void` if no.
+-- |  6. Can this be an array? `Unit` if yes, `Void` if no.
+-- |  7. Can this be a record? `Unit` if yes, `Void` if no.
+-- |  8. Can this be an int? `Unit` if yes, `Void` if no.
+-- |  9. Can this be a number? `Unit` if yes, `Void` if no.
+-- |  10. Can this be a char? `Unit` if yes, `Void` if no.
+-- |  11. Can this be a string? `Unit` if yes, `Void` if no.
+-- |  12. Can this be a Boolean? `Unit` if yes, `Void` if no.
+-- |
+-- | If two types use the same representation, you cannot set `Unit` on both of
+-- | them. There are two such illegal combinations: (`Int`, `Number`) and
+-- | (`Char`, `String`).
+-- |
+-- | #### Example
+-- |
+-- |     type EitherIntString =
+-- |       CompactEither Void Void Void () Void Void Void Unit Void Void Unit Void
+-- |     type EitherFunctionIntChar =
+-- |       CompactEither Int Int Void () Unit Void Void Unit Void Unit Void Void
 foreign import data CompactEither
-  :: *    -- Domain
-  -> *    -- Codomain
-  -> *    -- Element
-  -> # *  -- Fields
+  :: *    -- Function domain
+  -> *    -- Function codomain
+  -> *    -- Array element
+  -> # *  -- Record fields
   -> *    -- Function?
   -> *    -- Array?
   -> *    -- Record?
