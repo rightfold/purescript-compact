@@ -3,5 +3,9 @@
   "dependencies": {
     "purescript-unsafe-coerce": "^1.0.0",
     "purescript-prelude": "^1.0.1"
+  },
+  "devDependencies": {
+    "purescript-assert": "^1.0.0",
+    "purescript-eff": "^1.0.0"
   }
 }

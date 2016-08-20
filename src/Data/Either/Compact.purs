@@ -146,7 +146,7 @@ fromString = unsafeCoerce
 
 string :: forall domain codomain element fields function array record int number boolean result
         . result
-       -> (Char -> result)
+       -> (String -> result)
        -> CompactEither domain codomain element fields function array record int number Void Unit boolean
        -> result
 string default fn either
@@ -154,7 +154,7 @@ string default fn either
   | otherwise = default
 
 fromBoolean :: forall domain codomain element fields function array record int number char string
-            . String
+            . Boolean
            -> CompactEither domain codomain element fields function array record int number char string Unit
 fromBoolean = unsafeCoerce
 
